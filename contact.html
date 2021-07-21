@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>LAMINE DIEDHIOU</title>
+			<meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="style/disign.css">
+		</head>
+		<body>
+			<header>
+				<h1>A C S</h1>
+			</header>
+			<?php
+                include ('ig.php');
+				
+
+            ?>
+            <section>
+				<p><h1><strong> VEILLEZ REMPLIR LE FORMULAIRE</strong></h1></p>
+				<form method="post" action="lamine.php">
+					<fieldset id="section1">
+						<legend>Information personnelles :</legend>
+						<label for="prenom">Entrez votre prenom :</label>
+						<input type="text" id="prenom" name="prenom" autocomplete="on" placeholder="Lamine">
+
+						<label for="nom">Entrez votre nom :</label>
+						<input type="text" id="nom" name="nom" autocomplete="on" placeholder="Diédhiou">
+
+						<label for="adresse">Entrez votre adresse :</label>
+						<input type="text" id="adresse" name="adresse" autocomplete="on" placeholder="Grand Dakar">
+
+						<label for="email">Entrez votre email :</label>
+						<input type="email" id="email" name="email" autocomplete="on" placeholder="diedhioulamine525@gmail.com">
+
+						<label for="numéro">Entrez votre numéro de telephone :</label>
+						<input type="number" id="numéro" name="num" autocomplete="on" placeholder="77 641 14 11">
+
+						<label for="pres">Un commentaire :</label>
+						<textarea name="presentation" id="pres"></textarea>
+					</fieldset>
+					<fieldset id="sect">
+							<legend>choix</legend>
+							<label for="porte">Quelle genre de porte voulez-vous</label>
+							<select name="prorte" id="porte">
+								<option value="">Portes coulissantes</option>
+								<option value="">Une porte ouvrable</option>
+								<option value="">Deux portes ouvrables</option>
+							</select>
+
+							<label for="numerop">Nombre de porte :</label>
+							<input type="number" id="numerop" name="numerop"> <br>
+
+							<label for="fenaitre">Quelle genre de fenêtre voulez-vous</label> 
+							<select name="porte" id="porte">
+								<option value="">Fenêtres coulissantes</option>
+								<option value="">Une fenêtres ouvrable</option>
+								<option value="">Deux fenêtres ouvrables</option>
+							</select>
+
+							<label for="numerof">Nombre de fenêtre :</label>
+							<input type="number" id="numerof" name="numerof">
+						</fieldset>
+
+						</option>
+					</fieldset>
+						<input name="btenvoyer" type="submit" value="envoyer">
+				</form>
+			</section>
+			<?php
+			try{
+				$conn=new PDO("mysql:host=localhost; dbname=my_db", "myAdmin", "123456");
+				//echo "connection avec la bd succéeKKkKK";
+			}catch(Exception $e){
+				//echo "Not connectiong to our DB";
+			}
+
+			if (isset($_POST['btenvoyer'])) {
+				$prenom=$_POST['prenom'];
+				$nom=$_POST['nom'];
+				$adresse=$_POST['adresse'];
+				$email=$_POST['email'];
+				$num=$_POST['num'];
+				$commentaire=$_POST['commentaire'];
+				$porte=$_POST['poste'];
+				$nombrep=$_POST['nombrep'];
+				$fenaitre=$_POST['fenaitre'];
+				$nombref=$_POST['nombref'];
+	
+				$req2=$conn->prepare("INSERT INTO `groupe1` (`id`, `prenom`, `nom`, `adresse`, `email`, `num`, `commentaire`, `porte`, `nombrep`, `fenaitre`, `nombref`) VALUES 
+				(NULL:p,:n,:a,:e,:n,:c,:p,:np,:f,:nf)");
+				
+				$res=$req2->execute(array(
+					'p'=>$prenom,
+					'n'=>$nom,
+					'a'=>$age,
+					'e'=>$email,
+					'n'=>$num,
+					'c'=>$commentaire,
+					'p'=>$porte,
+					'np'=>$nombrep,
+					'f'=>$fenaitre,
+					'nf'=>$nombref
+				));
+	
+			}
+			header
+			?>
+			<section>
+				<p>Après avoir evoyé toutes les informations nous vous envoyerons un dévis.</p>
+			</section>
+		<footer>
+				<p>créer par <strong>A C S </strong> de la IG3 en 2021, à ne pas reproduire sous peine d'emprisonnement <br>
+					TEL : 77 562 95 07 - 70 760 62 20<br>
+					Email : aluminiumservices2@gmail.com <br>
+			En face la boulangerie de Grand Dakar Route de Lyndiane</p>
+		</footer>
+	</body>
+</html>
